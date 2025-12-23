@@ -8,12 +8,13 @@ public class Start extends JFrame {
     public Image vyborpers = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/fonpers.jpg");
     public ImageIcon pers1 = loadTransparentIcon("C:/Users/Пользователь/Downloads/игра/pers1.png");
     public ImageIcon pers2 = loadTransparentIcon("C:/Users/Пользователь/Downloads/игра/pers2.png");
-    private final int clickAreaX = 1100;
+  // кнопки из изображений
+    private final int clickAreaX = 1100; // неизменные параметры
     private final int clickAreaY = 50;
     private int shirinaexitX = 100;
     private int vysotanaexitY = 100;
     public boolean f = false;
-    public JLabel imagepers1;
+    public JLabel imagepers1; // отображает старую информацию в окне, нельзя пользователю ее менять
     public JLabel imagepers2;
     public ImageIcon pers1Big;
     public ImageIcon pers2Big;
@@ -72,10 +73,10 @@ public class Start extends JFrame {
     private ImageIcon loadTransparentIcon(String path) {
         try {
             Image image = new ImageIcon(path).getImage();
-            BufferedImage bufferedImage = new BufferedImage(
+            BufferedImage bufferedImage = new BufferedImage( // холст в памяти для работы с изображениями в программе
                     image.getWidth(null),
                     image.getHeight(null),
-                    BufferedImage.TYPE_INT_ARGB
+                    BufferedImage.TYPE_INT_ARGB // константа хранящая цветовую модель для буферезированного изображения, каждый пиксель храниться как 32 битное число
             );
 
             Graphics2D g2d = bufferedImage.createGraphics();
@@ -98,7 +99,7 @@ public class Start extends JFrame {
         ((JComponent) getContentPane()).setOpaque(false);
 
 
-        JPanel panel = new JPanel() {
+        JPanel panel = new JPanel() { // прямоугольная область для группировки и размещения кнопок и тд
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -113,8 +114,8 @@ public class Start extends JFrame {
             }
         };
         panel.setLayout(null);
-        panel.setOpaque(false);
-        panel.setBounds(0, 0, getWidth(), getHeight());
+        panel.setOpaque(false); // не рисует фон
+        panel.setBounds(0, 0, getWidth(), getHeight()); // ручное задание координат
 
         panel.addMouseListener(ml);
 

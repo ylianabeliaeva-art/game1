@@ -13,7 +13,7 @@ public class My_window extends JFrame
     public boolean s = false;
     public boolean r = false;
 
-    private final int clickAreaX = 424;
+    private final int clickAreaX = 424; // превращает в  константу
     private final int clickAreaY = 380;
     private int shirinanastrX = 100;
     private int vysotanastrY = 50;
