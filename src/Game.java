@@ -18,7 +18,9 @@ public class Game extends JFrame implements ActionListener {
     public Image platfsmall1 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/platfsmall.png");
     public Image platfsmall2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/platfsmall.png");
     public Image platfsmall3 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/platfsmall.png");
-
+    public Image prep = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/helth.png");
+int xpositionprep ;
+int ypositionprep;
     private final int clickAreaX = 1100;
     private final int clickAreaY = 50;
     private int shirinaexitX = 100;
@@ -35,6 +37,10 @@ public class Game extends JFrame implements ActionListener {
     int ypositionsmall3 = 665;
     int count1 = 3;
     int count2 = 3;
+    int count3 = 3;
+    int count4 = 3;
+    int count5 = 3;
+
     int speed = 20;
     Timer timer;
 
@@ -54,18 +60,110 @@ public class Game extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         xposition -= speed;
-        if (xposition <= -617) {
+        xpositionprep= xposition+250;
+        ypositionprep= yposition-80;
+        if (xposition <= -1600) {
             speed += 2;
+xposition =1365;
+if (count1==3)
+{
+    yposition=405;
+    count1--;
+}
+else if (count1==2)
+{
+    yposition=665;
+    count1--;
+}
+else if (count1==1)
+{
+    yposition=405;
+    count1=3;
+}
 
         }
         xposition2 -= speed;
-        if (xposition2 <= -617) {
+        if (xposition2 <= -1600) {
             speed += 2;
+            xposition2 = 1365;
+            if (count2==3)
+            {
+                yposition2=665;
+                count2--;
+            }
+           else if (count2==2)
+            {
+                yposition2=405;
+                count2--;
+            }
+           else if (count2==1)
+            {
+                yposition2=405;
+                count2=3;
+            }
         }
-        xpositionsmall1-=speed;
-        xpositionsmall2-= speed;
-        xpositionsmall3-= speed;
+        xpositionsmall1 -= speed;
+        if (xpositionsmall1 <= -1600) {
+            speed += 2;
+            xpositionsmall1 =1365;
+            if (count3==3)
+            {
+                ypositionsmall1=405;
+                count3--;
+            }
+           else if (count3==2)
+            {
+                ypositionsmall1=405;
+                count3--;
+            }
+          else   if (count3==1)
+            {
+                ypositionsmall1=665;
+                count3=3;
+            }
+        }
+        xpositionsmall2 -= speed;
+        if (xpositionsmall2 <= -1600) {
+            speed += 2;
+            xpositionsmall2 =1365;
+            if (count4==3)
+            {
+                ypositionsmall2=405;
+                count4--;
+            }
+          else   if (count4==2)
+            {
+                ypositionsmall2=665;
+                count4--;
+            }
+           else if (count4==1)
+            {
+                ypositionsmall2=665;
+                count4=3;
+            }
+        }
+        xpositionsmall3 -= speed;
+        if (xpositionsmall3 <= -1600) {
+            speed += 2;
+            xpositionsmall3 =1365;
+            if (count5==3)
+            {
+                ypositionsmall3=665;
+                count5--;
+            }
+          else   if (count5==2)
+            {
+                ypositionsmall3=405;
+                count5--;
+            }
+         else if (count5==1)
+            {
+                ypositionsmall3=405;
+                count5 =3;
+            }
+        }
         repaint();
+
     }
 
     MouseListener ml = new MouseListener() {
@@ -116,6 +214,7 @@ public class Game extends JFrame implements ActionListener {
         g.drawImage(platfsmall1, xpositionsmall1, ypositionsmall1, this);
         g.drawImage(platfsmall2, xpositionsmall2, ypositionsmall2, this);
         g.drawImage(platfsmall3, xpositionsmall3, ypositionsmall3, this);
+        g.drawImage(prep, xpositionprep, ypositionprep, this);
 
     }
 }
