@@ -18,9 +18,15 @@ public class Game extends JFrame implements ActionListener {
     public Image platfsmall1 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/platfsmall.png");
     public Image platfsmall2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/platfsmall.png");
     public Image platfsmall3 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/platfsmall.png");
-    public Image prep = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/helth.png");
-int xpositionprep ;
+    public Image prep = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/one_resized.png");
+    public Image prep2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/one_resized.png");
+    public Image bonus = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/five_resized.png");
+    int xpositionprep ;
 int ypositionprep;
+    int xpositionprep2 ;
+    int ypositionprep2;
+    int xpositionbonus=-100 ;
+    int ypositionbonus=-100;
     private final int clickAreaX = 1100;
     private final int clickAreaY = 50;
     private int shirinaexitX = 100;
@@ -40,6 +46,7 @@ int ypositionprep;
     int count3 = 3;
     int count4 = 3;
     int count5 = 3;
+    int countprep = 3;
 
     int speed = 20;
     Timer timer;
@@ -60,26 +67,28 @@ int ypositionprep;
     public void actionPerformed(ActionEvent e) {
 
         xposition -= speed;
-        xpositionprep= xposition+250;
-        ypositionprep= yposition-80;
         if (xposition <= -1600) {
             speed += 2;
-xposition =1365;
-if (count1==3)
-{
-    yposition=405;
-    count1--;
-}
-else if (count1==2)
-{
-    yposition=665;
-    count1--;
-}
-else if (count1==1)
-{
-    yposition=405;
-    count1=3;
-}
+               xposition =1365;
+               countprep--;
+            if (count1==3)
+            {
+                yposition=405;
+                    xpositionprep=xposition+250;
+                    ypositionprep= yposition-80;
+                    countprep--;
+                count1--;
+            }
+            else if (count1==2)
+            {
+                yposition=665;
+                count1--;
+            }
+            else if (count1==1)
+            {
+                yposition=405;
+                count1=3;
+            }
 
         }
         xposition2 -= speed;
@@ -162,6 +171,42 @@ else if (count1==1)
                 count5 =3;
             }
         }
+        if (count1==3 )
+        {
+            xpositionprep=xposition+250;
+            ypositionprep= yposition-80;
+
+        }
+      if (count3==2)
+        {
+            xpositionprep=xpositionsmall1+90;
+            ypositionprep=ypositionsmall1-80;
+
+        }
+       if (count2==1)
+        {
+            xpositionprep= xposition2+400;
+            ypositionprep=yposition2-80;
+
+        }
+        if (count4==3)
+        {
+            xpositionprep2= xpositionsmall2+90;
+            ypositionprep2=ypositionsmall2-80;
+        }
+        if (count5==2)
+        {
+            xpositionprep2= xpositionsmall3+100;
+            ypositionprep2=ypositionsmall3-80;
+
+        }
+        if (count1==2)
+        {
+            xpositionbonus = xposition + 200;
+            ypositionbonus = yposition - 80;
+        }
+
+
         repaint();
 
     }
@@ -214,7 +259,10 @@ else if (count1==1)
         g.drawImage(platfsmall1, xpositionsmall1, ypositionsmall1, this);
         g.drawImage(platfsmall2, xpositionsmall2, ypositionsmall2, this);
         g.drawImage(platfsmall3, xpositionsmall3, ypositionsmall3, this);
-        g.drawImage(prep, xpositionprep, ypositionprep, this);
+        g.drawImage(prep, xpositionprep, ypositionprep+20, this);
+        g.drawImage(prep2, xpositionprep2, ypositionprep2+20, this);
+        g.drawImage(bonus, xpositionbonus, ypositionbonus+20, this);
+
 
     }
 }
