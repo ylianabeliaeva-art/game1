@@ -47,9 +47,13 @@ int ypositionprep;
     int count4 = 3;
     int count5 = 3;
     int countprep = 3;
+    JLabel imagejlable;
+    int xpositionpers = 150;
+    int ypositionpers = 450;
 
     int speed = 20;
     Timer timer;
+    Timer timerpers;
 
     public Game(MouseAdapter start) {
 
@@ -61,6 +65,75 @@ int ypositionprep;
         timer.start();
         addMouseListener(ml);
         setVisible(true);
+        JPanel jPanel = new JPanel();
+        Image image = Toolkit.getDefaultToolkit().getImage("C:/Users/Пользователь/Downloads/игра/pers1_resized.png");
+        MediaTracker mediaTracker = new MediaTracker(this);
+        mediaTracker.addImage(pers1,0);
+        ImageIcon imageIcon = new ImageIcon(image);
+        imagejlable = new JLabel(imageIcon);
+        jPanel.add(imagejlable);
+        /*timerpers=new Timer(20, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ypositionpers-= 20;
+                repaint();
+            }
+        });
+        timerpers.start();*/
+        Timer timermoove = new Timer(20, null);
+        timermoove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                xpositionpers -=3;
+                    repaint();
+// проверку окна
+            }
+        });
+        timermoove.start();
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode()==KeyEvent.VK_UP)
+                {
+                    Timer timerPers = new Timer(20, null);
+                    timerPers.addActionListener(new ActionListener() {
+                        int count = 0;
+                        @Override
+                        public void actionPerformed(ActionEvent ev) {
+                            if (count < 25) {
+                                ypositionpers -= 10;
+                                xpositionpers +=6;
+                                count++;
+                                repaint();
+                            } else {
+                                timerPers.stop();
+                            }
+                        }
+                    });
+                    timerPers.start();
+                }
+                if (e.getKeyCode()==KeyEvent.VK_DOWN)
+                {
+                    Timer timerPers2 = new Timer(20, null);
+                    timerPers2.addActionListener(new ActionListener() {
+                        int count = 0;
+                        @Override
+                        public void actionPerformed(ActionEvent ev) {// встроенный метод таймера двигает персонажа
+                            if (count < 25) {
+                                ypositionpers += 10;
+                                xpositionpers +=6;
+                                count++;
+                                repaint();
+                            } else {
+                                timerPers2.stop();
+                            }
+                        }
+                    });
+                    timerPers2.start();
+                }
+            }
+        });
     }
 
     @Override
@@ -239,7 +312,6 @@ int ypositionprep;
         public void mouseExited(MouseEvent e) {
         }
     };
-
     public void paint(Graphics g) {
         super.paint(g);
         g.drawImage(fon, 0, 0, this);
@@ -249,9 +321,9 @@ int ypositionprep;
         g.drawImage(helth3, 800, 30, this);
         g.drawImage(pauza, 20, 30, this);
         if (Player.pers == true) {
-            g.drawImage(pers1, 150, 450, this);
+            g.drawImage(pers1, xpositionpers, ypositionpers, this);
         } else {
-            g.drawImage(pers2, 150, 450, this);
+            g.drawImage(pers2, xpositionpers, ypositionpers, this);
 
         }
         g.drawImage(platf, xposition, yposition, this);
