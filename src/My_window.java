@@ -2,16 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 public class My_window extends JFrame
 {
-    public Image fon = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/fonmenu.jpg");
-    public Image nastr = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/nastr.png");
+   public Image fon = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/fonmenu 1.png");
+   public Image nastr = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/nastr.png");
     public Image zapusk = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zapusk.png");
     public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zakryt.png");
     public boolean f = false;
     public boolean s = false;
     public boolean r = false;
+
 
     private final int clickAreaX = 424; // превращает в  константу
     private final int clickAreaY = 380;
@@ -72,6 +72,9 @@ public class My_window extends JFrame
 
     My_window ()
     {
+
+
+
         MediaTracker tracker = new MediaTracker(this);
         tracker.addImage(nastr, 0);
         try {
@@ -102,10 +105,14 @@ public class My_window extends JFrame
         }
 
 
-        setSize(1365,768);
+        setSize(1840,1080);
         setVisible(true);
         addMouseListener(ml);
+
+
     }
+
+
 
     public void paint(Graphics g)
     {
@@ -113,6 +120,7 @@ public class My_window extends JFrame
         g.drawImage(nastr,424,380, this);
         g.drawImage(zapusk,680,380, this);
         g.drawImage(exit,1100,50, this);
+
 
         if (f)
         {
@@ -131,5 +139,6 @@ public class My_window extends JFrame
 
     public static void main(String[] args) {
         My_window w =  new My_window();
+
     }
 }

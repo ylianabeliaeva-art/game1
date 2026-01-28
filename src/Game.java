@@ -1,11 +1,11 @@
-
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 public class Game extends JFrame implements ActionListener {
-    public Image fon = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/fongame1.jpg");
     public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zakryt.png");
     public Image helth1 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/helth.png");
     public Image helth2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/helth.png");
@@ -31,9 +31,9 @@ int ypositionprep;
     private final int clickAreaY = 50;
     private int shirinaexitX = 100;
     private int vysotanaexitY = 100;
-    int xposition = 1034;
+    int xposition = 900;
     int yposition = 405;
-    int xposition2 = 150;
+    int xposition2 = 130;
     int yposition2 = 665;
     int xpositionsmall1 = 1875;
     int ypositionsmall1 = 405;
@@ -48,20 +48,22 @@ int ypositionprep;
     int count5 = 3;
     int countprep = 3;
     JLabel imagejlable;
-    int xpositionpers = 150;
+    int xpositionpers = 450;
     int ypositionpers = 450;
+    boolean ydown= true;
+    boolean yup = true;
+    BufferedImage bi;
+    BufferedImage p;
 
-    int speed = 20;
+    int speed = 10;
     Timer timer;
-    Timer timerpers;
-
     public Game(MouseAdapter start) {
 
 
-        setSize(1365, 768);
+        setSize(1840, 1080);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null); // конкректный слой
-        timer = new Timer(200, this);
+        timer = new Timer(150, this);
         timer.start();
         addMouseListener(ml);
         setVisible(true);
@@ -70,22 +72,15 @@ int ypositionprep;
         MediaTracker mediaTracker = new MediaTracker(this);
         mediaTracker.addImage(pers1,0);
         ImageIcon imageIcon = new ImageIcon(image);
-        imagejlable = new JLabel(imageIcon);
+        imagejlable = new JLabel(imageIcon);// отображает изображение
         jPanel.add(imagejlable);
-        /*timerpers=new Timer(20, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ypositionpers-= 20;
-                repaint();
-            }
-        });
-        timerpers.start();*/
         Timer timermoove = new Timer(20, null);
         timermoove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                xpositionpers -=3;
+                xpositionpers -=1;
                     repaint();
+
 // проверку окна
             }
         });
@@ -94,8 +89,11 @@ int ypositionprep;
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode()==KeyEvent.VK_UP)
+                if (e.getKeyCode()==KeyEvent.VK_UP && yup == true)
+
                 {
+                    yup= false;
+                    ydown = true;
                     Timer timerPers = new Timer(20, null);
                     timerPers.addActionListener(new ActionListener() {
                         int count = 0;
@@ -107,34 +105,173 @@ int ypositionprep;
                                 count++;
                                 repaint();
                             } else {
+
+                                if (!((xpositionpers >= xposition && xpositionpers <= xposition+617 && ypositionpers  <= yposition +250 && ypositionpers>= yposition-250)
+                                        ||( xpositionpers >= xposition2 && xpositionpers <= xposition2+617 && ypositionpers  <= yposition2 +250 && ypositionpers>= yposition2-250)
+                                        || (xpositionpers >= xpositionsmall1 && xpositionpers <= xpositionsmall1 +362 && ypositionpers  <= ypositionsmall1 +250 && ypositionpers>= ypositionsmall1-250)
+                                        || (xpositionpers >= xpositionsmall2 && xpositionpers <= xpositionsmall2 +362 && ypositionpers  <= ypositionsmall2 +250 && ypositionpers>= ypositionsmall2-250)
+                                        || (xpositionpers >= xpositionsmall3 && xpositionpers <= xpositionsmall3 +362 && ypositionpers  <= ypositionsmall3 +250 && ypositionpers>= ypositionsmall3-250)
+                                )) {
+                                    ypositionpers += 250;
+                                    yup = true;
+                                    repaint();
+                                }
+                              if (!((xpositionpers >= xposition && xpositionpers <= xposition+617 && ypositionpers  <= yposition +250 && ypositionpers>= yposition-250)
+                                        ||( xpositionpers >= xposition2 && xpositionpers <= xposition2+617 && ypositionpers  <= yposition2 +250 && ypositionpers>= yposition2-250)
+                                        || (xpositionpers >= xpositionsmall1 && xpositionpers <= xpositionsmall1 +362 && ypositionpers  <= ypositionsmall1 +250 && ypositionpers>= ypositionsmall1-250)
+                                        || (xpositionpers >= xpositionsmall2 && xpositionpers <= xpositionsmall2 +362 && ypositionpers  <= ypositionsmall2 +250 && ypositionpers>= ypositionsmall2-250)
+                                        || (xpositionpers >= xpositionsmall3 && xpositionpers <= xpositionsmall3 +362 && ypositionpers  <= ypositionsmall3 +250 && ypositionpers>= ypositionsmall3-250)
+                                ))
+
+                                    {
+                                        GameOver gameOver = new GameOver(this);
+                                    }
+
                                 timerPers.stop();
                             }
                         }
                     });
                     timerPers.start();
+
                 }
-                if (e.getKeyCode()==KeyEvent.VK_DOWN)
+                if (e.getKeyCode()==KeyEvent.VK_RIGHT)
                 {
                     Timer timerPers2 = new Timer(20, null);
                     timerPers2.addActionListener(new ActionListener() {
                         int count = 0;
                         @Override
-                        public void actionPerformed(ActionEvent ev) {// встроенный метод таймера двигает персонажа
+                        public void actionPerformed(ActionEvent ev) {  // встроенный метод таймера двигает персонажа
                             if (count < 25) {
-                                ypositionpers += 10;
-                                xpositionpers +=6;
+                                xpositionpers +=10;
                                 count++;
                                 repaint();
                             } else {
+                                if (!((xpositionpers >= xposition && xpositionpers <= xposition+617 && ypositionpers  <= yposition +250 && ypositionpers>= yposition-250)
+                                        ||( xpositionpers >= xposition2 && xpositionpers <= xposition2+617 && ypositionpers  <= yposition2 +250 && ypositionpers>= yposition2-250)
+                                        || (xpositionpers >= xpositionsmall1 && xpositionpers <= xpositionsmall1 +362 && ypositionpers  <= ypositionsmall1 +250 && ypositionpers>= ypositionsmall1-250)
+                                        || (xpositionpers >= xpositionsmall2 && xpositionpers <= xpositionsmall2 +362 && ypositionpers  <= ypositionsmall2 +250 && ypositionpers>= ypositionsmall2-250)
+                                        || (xpositionpers >= xpositionsmall3 && xpositionpers <= xpositionsmall3 +362 && ypositionpers  <= ypositionsmall3 +250 && ypositionpers>= ypositionsmall3-250)
+                                )) {
+                                    ypositionpers += 250;
+                                    yup = true;
+                                    repaint();
+                                }
+                                if (!((xpositionpers >= xposition && xpositionpers <= xposition+617 && ypositionpers  <= yposition +250 && ypositionpers>= yposition-250)
+                                        ||( xpositionpers >= xposition2 && xpositionpers <= xposition2+617 && ypositionpers  <= yposition2 +250 && ypositionpers>= yposition2-250)
+                                        || (xpositionpers >= xpositionsmall1 && xpositionpers <= xpositionsmall1 +362 && ypositionpers  <= ypositionsmall1 +250 && ypositionpers>= ypositionsmall1-250)
+                                        || (xpositionpers >= xpositionsmall2 && xpositionpers <= xpositionsmall2 +362 && ypositionpers  <= ypositionsmall2 +250 && ypositionpers>= ypositionsmall2-250)
+                                        || (xpositionpers >= xpositionsmall3 && xpositionpers <= xpositionsmall3 +362 && ypositionpers  <= ypositionsmall3 +250 && ypositionpers>= ypositionsmall3-250)
+                                ))
+
+                                {
+                                    GameOver gameOver = new GameOver(this);
+                                    //dispose();
+                                }
+
                                 timerPers2.stop();
                             }
                         }
                     });
                     timerPers2.start();
+
                 }
-            }
-        });
+                if (e.getKeyCode()==KeyEvent.VK_LEFT)
+                {
+                    Timer timerPers2 = new Timer(20, null);
+                    timerPers2.addActionListener(new ActionListener() {
+                        int count = 0;
+                        @Override
+                        public void actionPerformed(ActionEvent ev) {  // встроенный метод таймера двигает персонажа
+                            if (count < 25) {
+                                xpositionpers -=10;
+                                count++;
+                                repaint();
+                            } else {
+                                if (!((xpositionpers >= xposition && xpositionpers <= xposition+617 && ypositionpers  <= yposition +250 && ypositionpers>= yposition-250)
+                                        ||( xpositionpers >= xposition2 && xpositionpers <= xposition2+617 && ypositionpers  <= yposition2 +250 && ypositionpers>= yposition2-250)
+                                        || (xpositionpers >= xpositionsmall1 && xpositionpers <= xpositionsmall1 +362 && ypositionpers  <= ypositionsmall1 +250 && ypositionpers>= ypositionsmall1-250)
+                                        || (xpositionpers >= xpositionsmall2 && xpositionpers <= xpositionsmall2 +362 && ypositionpers  <= ypositionsmall2 +250 && ypositionpers>= ypositionsmall2-250)
+                                        || (xpositionpers >= xpositionsmall3 && xpositionpers <= xpositionsmall3 +362 && ypositionpers  <= ypositionsmall3 +250 && ypositionpers>= ypositionsmall3-250)
+                                )) {
+                                    ypositionpers += 250;
+                                    yup = true;
+                                    repaint();
+                                }
+                                if (!((xpositionpers >= xposition && xpositionpers <= xposition+617 && ypositionpers  <= yposition +250 && ypositionpers>= yposition-250)
+                                        ||( xpositionpers >= xposition2 && xpositionpers <= xposition2+617 && ypositionpers  <= yposition2 +250 && ypositionpers>= yposition2-250)
+                                        || (xpositionpers >= xpositionsmall1 && xpositionpers <= xpositionsmall1 +362 && ypositionpers  <= ypositionsmall1 +250 && ypositionpers>= ypositionsmall1-250)
+                                        || (xpositionpers >= xpositionsmall2 && xpositionpers <= xpositionsmall2 +362 && ypositionpers  <= ypositionsmall2 +250 && ypositionpers>= ypositionsmall2-250)
+                                        || (xpositionpers >= xpositionsmall3 && xpositionpers <= xpositionsmall3 +362 && ypositionpers  <= ypositionsmall3 +250 && ypositionpers>= ypositionsmall3-250)
+                                ))
+
+                                {
+                                    GameOver gameOver = new GameOver(this);
+                                    //dispose();
+                                }
+
+                                timerPers2.stop();
+                            }
+                        }
+                    });
+                    timerPers2.start();
+
+                }
+                if (e.getKeyCode()==KeyEvent.VK_DOWN && ydown == true)
+                {
+                    ydown = false;
+                    yup = true;
+                    Timer timerPers2 = new Timer(20, null);
+                    timerPers2.addActionListener(new ActionListener() {
+                        int count = 0;
+                        @Override
+                        public void actionPerformed(ActionEvent ev) {  // встроенный метод таймера двигает персонажа
+                            if (count < 25) {
+                                ypositionpers += 10;
+                                xpositionpers +=6;
+                                count++;
+                                repaint();
+                                } else {
+                                if (!((xpositionpers >= xposition && xpositionpers <= xposition+617 && ypositionpers  <= yposition +250 && ypositionpers>= yposition-250)
+                                        ||( xpositionpers >= xposition2 && xpositionpers <= xposition2+617 && ypositionpers  <= yposition2 +250 && ypositionpers>= yposition2-250)
+                                        || (xpositionpers >= xpositionsmall1 && xpositionpers <= xpositionsmall1 +362 && ypositionpers  <= ypositionsmall1 +250 && ypositionpers>= ypositionsmall1-250)
+                                        || (xpositionpers >= xpositionsmall2 && xpositionpers <= xpositionsmall2 +362 && ypositionpers  <= ypositionsmall2 +250 && ypositionpers>= ypositionsmall2-250)
+                                        || (xpositionpers >= xpositionsmall3 && xpositionpers <= xpositionsmall3 +362 && ypositionpers  <= ypositionsmall3 +250 && ypositionpers>= ypositionsmall3-250)
+                                )) {
+                                    ypositionpers += 250;
+                                    yup = true;
+                                    repaint();
+                                }
+                                if (!((xpositionpers >= xposition && xpositionpers <= xposition+617 && ypositionpers  <= yposition +250 && ypositionpers>= yposition-250)
+                                        ||( xpositionpers >= xposition2 && xpositionpers <= xposition2+617 && ypositionpers  <= yposition2 +250 && ypositionpers>= yposition2-250)
+                                        || (xpositionpers >= xpositionsmall1 && xpositionpers <= xpositionsmall1 +362 && ypositionpers  <= ypositionsmall1 +250 && ypositionpers>= ypositionsmall1-250)
+                                        || (xpositionpers >= xpositionsmall2 && xpositionpers <= xpositionsmall2 +362 && ypositionpers  <= ypositionsmall2 +250 && ypositionpers>= ypositionsmall2-250)
+                                        || (xpositionpers >= xpositionsmall3 && xpositionpers <= xpositionsmall3 +362 && ypositionpers  <= ypositionsmall3 +250 && ypositionpers>= ypositionsmall3-250)
+                                ))
+
+                                {
+                                    GameOver gameOver = new GameOver(this);
+                                    //dispose();
+                                }
+
+                                timerPers2.stop();
+                            }
+                        }
+                    });
+                    timerPers2.start();
+
+
+                    timerPers2.start();
+                }
+        }});
+        try{
+            p= ImageIO.read(new File("src/img/fongame1.jpg"));
+        } catch (IOException e)
+        {
+           // System.out.println("tt");
+        }
+        bi=new BufferedImage(getWidth(),getHeight(),6);
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -313,28 +450,39 @@ int ypositionprep;
         }
     };
     public void paint(Graphics g) {
-        super.paint(g);
-        g.drawImage(fon, 0, 0, this);
-        g.drawImage(exit, 1100, 30, this);
-        g.drawImage(helth1, 400, 30, this);
-        g.drawImage(helth2, 600, 30, this);
-        g.drawImage(helth3, 800, 30, this);
-        g.drawImage(pauza, 20, 30, this);
+        Graphics2D test;
+        test=bi.createGraphics();
+        test.drawImage(p,0,0,this);
+        //test.drawImage(fon, 0, 0, this);
+        test.drawImage(exit, 1100, 30, this);
+        test.drawImage(helth1, 400, 30, this);
+        test.drawImage(helth2, 600, 30, this);
+        test.drawImage(helth3, 800, 30, this);
+        test.drawImage(pauza, 20, 30, this);
         if (Player.pers == true) {
-            g.drawImage(pers1, xpositionpers, ypositionpers, this);
+            test.drawImage(pers1, xpositionpers, ypositionpers, this);
         } else {
-            g.drawImage(pers2, xpositionpers, ypositionpers, this);
-
+            test.drawImage(pers2, xpositionpers, ypositionpers, this);
         }
-        g.drawImage(platf, xposition, yposition, this);
-        g.drawImage(platf2, xposition2, yposition2, this);
-        g.drawImage(platfsmall1, xpositionsmall1, ypositionsmall1, this);
-        g.drawImage(platfsmall2, xpositionsmall2, ypositionsmall2, this);
-        g.drawImage(platfsmall3, xpositionsmall3, ypositionsmall3, this);
-        g.drawImage(prep, xpositionprep, ypositionprep+20, this);
-        g.drawImage(prep2, xpositionprep2, ypositionprep2+20, this);
-        g.drawImage(bonus, xpositionbonus, ypositionbonus+20, this);
+        test.drawImage(platf, xposition, yposition, this);
+        test.drawImage(platf2, xposition2, yposition2, this);
+        test.drawImage(platfsmall1, xpositionsmall1, ypositionsmall1, this);
+        test.drawImage(platfsmall2, xpositionsmall2, ypositionsmall2, this);
+        test.drawImage(platfsmall3, xpositionsmall3, ypositionsmall3, this);
+        test.drawImage(prep, xpositionprep, ypositionprep+20, this);
+        test.drawImage(prep2, xpositionprep2, ypositionprep2+20, this);
+        test.drawImage(bonus, xpositionbonus, ypositionbonus+20, this);
+        g.drawImage(bi,0,0,this);
+        if (xpositionpers>=1360 || xpositionpers<=0)
+        {
+            GameOver gameOver= new GameOver(this);
+            dispose();
+        }
+        if (ypositionpers<=0 || ypositionpers>=768)
+        {
+            GameOver gameOver = new GameOver(this);
+            dispose();
+        }
 
-
-    }
+}
 }

@@ -51,7 +51,7 @@ public class Nastr extends JFrame {
     public Nastr(My_window my_window) {
         this.my_window = my_window;
         my_window.setVisible(false);
-        setSize(1365, 768);
+        setSize(1840, 1080);
         setVisible(true);
         addMouseListener(ml);
         addWindowListener(new WindowListener() {

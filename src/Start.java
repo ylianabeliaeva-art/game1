@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class Start extends JFrame {
     public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zakryt.png");
-    public Image vyborpers = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/fonpers.jpg");
+    public Image vyborpers = Toolkit.getDefaultToolkit().createImage("src/img/fonpers.jpg");
     public ImageIcon pers1 = loadTransparentIcon("C:/Users/Пользователь/Downloads/игра/pers1.png");
     public ImageIcon pers2 = loadTransparentIcon("C:/Users/Пользователь/Downloads/игра/pers2.png");
   // кнопки из изображений
@@ -92,7 +92,7 @@ public class Start extends JFrame {
 
     public Start(MouseListener mouseListener) {
 
-        setSize(1365, 768);
+        setSize(1840, 1080);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
 
@@ -109,7 +109,7 @@ public class Start extends JFrame {
                 }
 
                 if (exit != null) {
-                    g.drawImage(exit, 1100, 50, this);
+                    g.drawImage(exit, 1500, 50, this);
                 }
             }
         };
@@ -125,8 +125,8 @@ public class Start extends JFrame {
         imagepers1.setOpaque(false);
         imagepers2.setOpaque(false);
 
-        imagepers1.setBounds(450, 130, pers1.getIconWidth(), pers1.getIconHeight());
-        imagepers2.setBounds(800, 130, pers2.getIconWidth(), pers2.getIconHeight());
+        imagepers1.setBounds(450, 330, pers1.getIconWidth(), pers1.getIconHeight());
+        imagepers2.setBounds(800, 330, pers2.getIconWidth(), pers2.getIconHeight());
 
         panel.add(imagepers1);
         panel.add(imagepers2);
@@ -192,7 +192,7 @@ public class Start extends JFrame {
     public Start(My_window my_window) {
         this.my_window1 = my_window;
         my_window.setVisible(false);
-        setSize(1365, 768);
+        setSize(1840, 1080);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
 
@@ -203,6 +203,7 @@ public class Start extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
+
 
                 if (vyborpers != null) {
                     g.drawImage(vyborpers, 0, 0, getWidth(), getHeight(), this);
@@ -225,8 +226,8 @@ public class Start extends JFrame {
         imagepers1.setOpaque(false);
         imagepers2.setOpaque(false);
 
-        imagepers1.setBounds(450, 130, pers1.getIconWidth(), pers1.getIconHeight());
-        imagepers2.setBounds(800, 130, pers2.getIconWidth(), pers2.getIconHeight());
+        imagepers1.setBounds(350, 330, pers1.getIconWidth(), pers1.getIconHeight());
+        imagepers2.setBounds(900, 330, pers2.getIconWidth(), pers2.getIconHeight());
 
         panel.add(imagepers1);
         panel.add(imagepers2);
@@ -251,6 +252,7 @@ public class Start extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+
                 Game game = new Game(this);
             }
 
@@ -272,6 +274,7 @@ public class Start extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Game game = new Game(this);
+                dispose();
             }
         });
 
