@@ -152,7 +152,9 @@ public class Start extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Player.pers = true;
-                Game game = new Game(this);
+                //Game game = new Game(this);
+                System.out.println("woman");
+                new testGame (this);
             }
 
         });
@@ -173,7 +175,9 @@ public class Start extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Player.pers = false;
-                Game game = new Game(this);
+                System.out.println("men");
+                //Game game = new Game(this);
+                new testGame (this);
             }
         });
 
@@ -253,7 +257,8 @@ public class Start extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                Game game = new Game(this);
+                //Game game = new Game(this);
+                new testGame (this);
             }
 
         });
@@ -273,7 +278,8 @@ public class Start extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                Game game = new Game(this);
+                //Game game = new Game(this);
+                new testGame (this);
                 dispose();
             }
         });

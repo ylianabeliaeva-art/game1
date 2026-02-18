@@ -20,7 +20,7 @@ public class GameOver extends JFrame {
     private final int clickAreaY1 = 380;
     private int shirinahomeX = 100;
     private int vysotahomeY = 50;
-   public  GameOver(Game game) {
+   public  GameOver(testGame testgame) {
 
 
        MediaTracker tracker = new MediaTracker(this);
@@ -108,13 +108,8 @@ public class GameOver extends JFrame {
 
                     if (s)
                     {
-                       Game game  = new Game(new MouseAdapter() {
-                           @Override
-                           public void mouseClicked(MouseEvent e) {
-                               super.mouseClicked(e);
-                           }
-                       });
-                       dispose();
+                        dispose();
+                        new testGame(null);
                     }
 
                 }

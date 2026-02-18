@@ -6,31 +6,33 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 public class Game extends JFrame implements ActionListener {
-    public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zakryt.png");
+    public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/IdeaProjects/game1/src/imgzakryt.png");
     public Image helth1 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/helth.png");
     public Image helth2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/helth.png");
     public Image helth3 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/helth.png");
     public Image pauza = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/resize_image_693d9e250003f.png");
-    public Image platf = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/photo_5328281967692287705_x-no-bg-preview (carve.photos).png");
-    public Image platf2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/photo_5328281967692287705_x-no-bg-preview (carve.photos).png");
-    public Image pers1 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/pers1_resized.png");
-    public Image pers2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/pers2_resized.png");
-    public Image platfsmall1 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/platfsmall.png");
-    public Image platfsmall2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/platfsmall.png");
-    public Image platfsmall3 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/platfsmall.png");
+   // public Image platf = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/IdeaProjects/game1/src/imgplatf600.png");
+   // public Image platf2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/IdeaProjects/game1/src/imgplatf600.png");
+    public Image pers1 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/IdeaProjects/game1/src/img/pers1_resized.png");
+    public platforma pl1 = new platforma(50,405, "C:/Users/Пользовател/Downloads/игра/platf600.png",1001,100);
+    public Image pers2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/IdeaProjects/game1/src/imgpers2_resized.png");
+    /*public Image platfsmall1 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/IdeaProjects/game1/src/imgplatf350.png");
+    public Image platfsmall2 = Toolkit.getDefaultToolkit().createImage("C:\Users\Пользователь\Downloads\игра\platf350.png");
+    public Image platfsmall3 = Toolkit.getDefaultToolkit().createImage("C:\Users\Пользователь\Downloads\игра\platf350.png");
+*/
     public Image prep = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/one_resized.png");
     public Image prep2 = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/one_resized.png");
     public Image bonus = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/five_resized.png");
     int xpositionprep ;
-int ypositionprep;
+    int ypositionprep;
     int xpositionprep2 ;
     int ypositionprep2;
     int xpositionbonus=-100 ;
     int ypositionbonus=-100;
-    private final int clickAreaX = 1100;
-    private final int clickAreaY = 50;
-    private int shirinaexitX = 100;
-    private int vysotanaexitY = 100;
+    private final int clickAreaX = 20;
+    private final int clickAreaY = 30;
+    private int shirinapauzaX = 50;
+    private int vysotapauzaY = 50;
     int xposition = 900;
     int yposition = 405;
     int xposition2 = 130;
@@ -68,7 +70,7 @@ int ypositionprep;
         addMouseListener(ml);
         setVisible(true);
         JPanel jPanel = new JPanel();
-        Image image = Toolkit.getDefaultToolkit().getImage("C:/Users/Пользователь/Downloads/игра/pers1_resized.png");
+        Image image = Toolkit.getDefaultToolkit().getImage("C:/Users/Пользователь/IdeaProjects/game1/src/img/pers1_resized.png");
         MediaTracker mediaTracker = new MediaTracker(this);
         mediaTracker.addImage(pers1,0);
         ImageIcon imageIcon = new ImageIcon(image);
@@ -264,7 +266,7 @@ int ypositionprep;
                 }
         }});
         try{
-            p= ImageIO.read(new File("src/img/fongame1.jpg"));
+            p= ImageIO.read(new File("C:/Users/Пользователь/Downloads/игра/fongame1.jpg"));
         } catch (IOException e)
         {
            // System.out.println("tt");
@@ -278,7 +280,7 @@ int ypositionprep;
 
         xposition -= speed;
         if (xposition <= -1600) {
-            speed += 2;
+                speed += 2;
                xposition =1365;
                countprep--;
             if (count1==3)
@@ -426,10 +428,10 @@ int ypositionprep;
         public void mouseClicked(MouseEvent e) {
             int mouseX = e.getX();
             int mouseY = e.getY();
-            if (mouseX >= clickAreaX && mouseX <= clickAreaX + shirinaexitX &&
-                    mouseY >= clickAreaY && mouseY <= clickAreaY + vysotanaexitY) {
+            if (mouseX >= clickAreaX && mouseX <= clickAreaX + shirinapauzaX &&
+                    mouseY >= clickAreaY && mouseY <= clickAreaY + vysotapauzaY) {
                 dispose();
-                Start start = new Start(this);
+                Pauza pauza = new Pauza(this);
             }
         }
 
@@ -459,19 +461,23 @@ int ypositionprep;
         test.drawImage(helth2, 600, 30, this);
         test.drawImage(helth3, 800, 30, this);
         test.drawImage(pauza, 20, 30, this);
+
         if (Player.pers == true) {
             test.drawImage(pers1, xpositionpers, ypositionpers, this);
         } else {
             test.drawImage(pers2, xpositionpers, ypositionpers, this);
         }
-        test.drawImage(platf, xposition, yposition, this);
-        test.drawImage(platf2, xposition2, yposition2, this);
-        test.drawImage(platfsmall1, xpositionsmall1, ypositionsmall1, this);
-        test.drawImage(platfsmall2, xpositionsmall2, ypositionsmall2, this);
-        test.drawImage(platfsmall3, xpositionsmall3, ypositionsmall3, this);
+      //  test.drawImage(platf, xposition, yposition, this);
+       // test.drawImage(platf2, xposition2, yposition2, this);
+       // test.drawImage(platfsmall1, xpositionsmall1, ypositionsmall1, this);
+
+       // test.drawImage(platfsmall2, xpositionsmall2, ypositionsmall2, this);
+      //  test.drawImage(platfsmall3, xpositionsmall3, ypositionsmall3, this);
         test.drawImage(prep, xpositionprep, ypositionprep+20, this);
         test.drawImage(prep2, xpositionprep2, ypositionprep2+20, this);
         test.drawImage(bonus, xpositionbonus, ypositionbonus+20, this);
+        test.drawImage(pl1.img, pl1.x,pl1.y,this);
+        System.out.println(1);
         g.drawImage(bi,0,0,this);
         if (xpositionpers>=1360 || xpositionpers<=0)
         {
