@@ -4,7 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 public class My_window extends JFrame
 {
-   public Image fon = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/fonmenu 1.png");
+   public Image fon = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/photo_5238148776155879261_y.jpg");
    public Image nastr = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/nastr.png");
     public Image zapusk = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zapusk.png");
     public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zakryt.png");

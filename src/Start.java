@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class Start extends JFrame {
     public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zakryt.png");
-    public Image vyborpers = Toolkit.getDefaultToolkit().createImage("src/img/fonpers.jpg");
+    public Image vyborpers = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/photo_5238148776155879126_y.jpg");
     public ImageIcon pers1 = loadTransparentIcon("C:/Users/Пользователь/Downloads/игра/pers1.png");
     public ImageIcon pers2 = loadTransparentIcon("C:/Users/Пользователь/Downloads/игра/pers2.png");
   // кнопки из изображений
@@ -152,7 +152,6 @@ public class Start extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Player.pers = true;
-                //Game game = new Game(this);
                 System.out.println("woman");
                 new testGame (this);
             }
@@ -176,7 +175,6 @@ public class Start extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 Player.pers = false;
                 System.out.println("men");
-                //Game game = new Game(this);
                 new testGame (this);
             }
         });

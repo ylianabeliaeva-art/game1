@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Random;
 
 public class platforma {
     public Image img;
@@ -16,6 +17,18 @@ public class platforma {
         count=3;
         width= w;
         height = h;
+    }
+    public void move(int dx)
+    {
+        this.x -= dx;
+        if (x + width <0)
+        {
+            x = 1800 + new Random().nextInt(250);
+            if (new Random().nextInt(30)>15)
+                y = 700;
+            else
+                y=500;
+        }
     }
 
 }

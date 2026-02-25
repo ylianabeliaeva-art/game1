@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Random;
 
 public class Object {
     public Image img;
@@ -7,6 +8,7 @@ public class Object {
     public int count;
     int width;
     int height;
+    boolean move=true;
     public boolean wer(Rectangle prep){
         Rectangle bord = new Rectangle(x, y, width, height);
         if(bord.intersects(prep)){
@@ -26,6 +28,44 @@ public class Object {
         height = h;
 
 
+    }
+    public void moveobj (int speedpl, platforma[] platformas)
+
+    {
+        if ( x + width< 0)
+        {
+            visible=true;
+            move=false;
+            x= 2000 + new Random().nextInt(500);
+            if (new Random().nextInt(30)<15)
+                y = 505-height;
+            else
+                y = 705-height;
+        }
+
+        if (x>=2000)
+            x -= speedpl;
+        else
+            if (move)
+                x-=speedpl;
+
+        if (move==false)
+        {
+            for (int i=0; i< platformas.length; i++)
+            {
+                Rectangle bord = new Rectangle(x, y, width, height);
+                if (y>600 && platformas[i].y ==700)
+                    if (bord.intersects(new Rectangle(platformas[i].x, platformas[i].y, platformas[i].width, platformas[i].height)))
+                    {
+                        move=true;
+                    }
+                if (y<500 && platformas[i].y ==500)
+                    if (bord.intersects(new Rectangle(platformas[i].x, platformas[i].y, platformas[i].width, platformas[i].height)))
+                    {
+                        move=true;
+                    }
+            }
+        }
     }
 
 }
