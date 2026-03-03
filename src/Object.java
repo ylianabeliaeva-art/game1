@@ -37,7 +37,7 @@ public class Object {
             visible=true;
             move=false;
             x= 2000 + new Random().nextInt(500);
-            if (new Random().nextInt(30)<15)
+            if (new Random().nextInt(2)<2)
                 y = 505-height;
             else
                 y = 705-height;

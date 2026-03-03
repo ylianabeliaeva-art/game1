@@ -431,7 +431,7 @@ public class Game extends JFrame implements ActionListener {
             if (mouseX >= clickAreaX && mouseX <= clickAreaX + shirinapauzaX &&
                     mouseY >= clickAreaY && mouseY <= clickAreaY + vysotapauzaY) {
                 dispose();
-                Pauza pauza = new Pauza(this);
+              //  Pauza pauza = new Pauza(this);
             }
         }
 

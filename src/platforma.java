@@ -18,17 +18,18 @@ public class platforma {
         width= w;
         height = h;
     }
-    public void move(int dx)
+    public void   move(int dx, int x_end)
     {
         this.x -= dx;
         if (x + width <0)
         {
-            x = 1800 + new Random().nextInt(250);
+           x = x_end + 100+new Random().nextInt(200);
             if (new Random().nextInt(30)>15)
                 y = 700;
             else
                 y=500;
         }
+
     }
 
 }

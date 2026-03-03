@@ -7,7 +7,7 @@ import java.awt.event.WindowListener;
 
 public class Nastr extends JFrame {
     public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zakryt.png");
-    public Image nastrimage = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/fonnastr.png");
+    public Image nastrimage = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/fonnastr.png");
     private final int clickAreaX = 1100;
     private final int clickAreaY = 50;
     private int shirinaexitX = 100;

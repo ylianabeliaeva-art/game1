@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class GameOver extends JFrame {
-    public Image window = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/gameover.jpg");
+    public Image window = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Pictures/otchis.jpg");
     public Image zanovo = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zanovo.png");
     public Image home = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/home.png");
     public boolean f = false;

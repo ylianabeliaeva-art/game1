@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class Start extends JFrame {
     public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zakryt.png");
-    public Image vyborpers = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/photo_5238148776155879126_y.jpg");
+    public Image vyborpers = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Pictures/f.png");
     public ImageIcon pers1 = loadTransparentIcon("C:/Users/Пользователь/Downloads/игра/pers1.png");
     public ImageIcon pers2 = loadTransparentIcon("C:/Users/Пользователь/Downloads/игра/pers2.png");
   // кнопки из изображений
