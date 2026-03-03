@@ -12,7 +12,7 @@ public class testGame extends JFrame implements ActionListener {
     public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/IdeaProjects/game1/src/imgzakryt.png");
     public Image pauza = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/resize_image_693d9e250003f.png");
 
-    Player myplayer = new Player(450, 450, 65, 250);
+    Player myplayer = new Player(450, 450, 60, 250);
 
     Object helth1 = new Object(400, 30, "C:/Users/Пользователь/Downloads/игра/helth.png", 100, 100);
     Object helth2 = new Object(600, 30, "C:/Users/Пользователь/Downloads/игра/helth.png", 100, 100);
