@@ -6,18 +6,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class GameOver extends JFrame {
-    public Image window = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Pictures/otchis.jpg");
-    public Image zanovo = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zanovo.png");
-    public Image home = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/home.png");
+    public Image window = Toolkit.getDefaultToolkit().createImage("gameOver.png");
+    public Image zanovo = Toolkit.getDefaultToolkit().createImage("zanovo.png");
+    public Image home = Toolkit.getDefaultToolkit().createImage("home.png");
     public boolean f = false;
     public boolean s = false;
-    private final int clickAreaX = 424; // превращает в  константу
-    private final int clickAreaY = 380;
+    private final int clickAreaX = 700; // превращает в  константу
+    private final int clickAreaY = 600;
     private int shirinazanovoX = 100;
     private int vysotazanovoY = 50;
 
-    private final int clickAreaX1 = 680;
-    private final int clickAreaY1 = 380;
+    private final int clickAreaX1 = 1100;
+    private final int clickAreaY1 = 600;
     private int shirinahomeX = 100;
     private int vysotahomeY = 50;
    public  GameOver(testGame testgame) {
@@ -42,7 +42,7 @@ public class GameOver extends JFrame {
        } catch (InterruptedException e) {
            e.printStackTrace();
        }
-        setSize(1840, 1080);
+        setSize(1920, 1200);
 
         setVisible(true);
        addMouseListener(mouseListener);
@@ -98,8 +98,8 @@ public class GameOver extends JFrame {
 
                 public void paint (Graphics g){
                 g.drawImage(window, 0, 0, this);
-                    g.drawImage(home, 424, 380, this);
-                    g.drawImage(zanovo, 680, 380, this);
+                    g.drawImage(home, 700, 600, this);
+                    g.drawImage(zanovo, 1100, 600, this);
                     if (f)
                     {
                        My_window my_window = new My_window();

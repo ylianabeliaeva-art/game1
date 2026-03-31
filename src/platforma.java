@@ -25,9 +25,9 @@ public class platforma {
         {
            x = x_end + 100+new Random().nextInt(200);
             if (new Random().nextInt(30)>15)
-                y = 700;
+                y = 900;
             else
-                y=500;
+                y=600;
         }
 
     }

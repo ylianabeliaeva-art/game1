@@ -9,36 +9,37 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class testGame extends JFrame implements ActionListener {
-    public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/IdeaProjects/game1/src/imgzakryt.png");
-    public Image pauza = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/resize_image_693d9e250003f.png");
+    public Image pauza = Toolkit.getDefaultToolkit().createImage("pauza.png");
 
     Player myplayer = new Player(450, 450, 60, 250);
 
-    Object helth1 = new Object(400, 30, "C:/Users/Пользователь/Downloads/игра/helth.png", 100, 100);
-    Object helth2 = new Object(600, 30, "C:/Users/Пользователь/Downloads/игра/helth.png", 100, 100);
-    Object helth3 = new Object(800, 30, "C:/Users/Пользователь/Downloads/игра/helth.png", 100, 100);
+    Object helth1 = new Object(700, 30, "helth.png", 100, 100);
+    Object helth2 = new Object(900, 30, "helth.png", 100, 100);
+    Object helth3 = new Object(1100, 30, "helth.png", 100, 100);
 
-    platforma pl1 = new platforma(900, 600, "C:/Users/Пользователь/Downloads/игра/platf600.png", 600, 70);
-    platforma pl2 = new platforma(130, 700, "C:/Users/Пользователь/Downloads/игра/platf600.png", 600, 70);
-    platforma plm1 = new platforma(1875, 500, "C:/Users/Пользователь/Downloads/игра/platf350.png", 350, 70);
-    platforma plm2 = new platforma(2310, 500, "C:/Users/Пользователь/Downloads/игра/platf350.png", 350, 70);
-    platforma plm3 = new platforma(2675, 700, "C:/Users/Пользователь/Downloads/игра/platf350.png", 350, 70);
+    platforma pl1 = new platforma(900, 600, "platf600.geom.png", 600, 70);
+    platforma pl2 = new platforma(130, 900, "platf600.alg.png", 600, 70);
+    platforma plm1 = new platforma(1875, 600, "platf350.russ.png", 350, 70);
+    platforma plm2 = new platforma(2310, 600, "platf400.fiz.png", 400, 70);
+    platforma plm3 = new platforma(2675, 900, "platf350.lit.png", 350, 70);
     platforma[] plmas = {pl1, pl2, plm1, plm2, plm3};
 
-    Object prep = new Object(300, 500, "C:/Users/Пользователь/Downloads/one_resized.png", 73, 133);
-    Object prep2 = new Object(300, 300, "C:/Users/Пользователь/Downloads/one_resized.png", 73, 133);
-    Object bonus = new Object(pl1.x - 100, pl1.y - 100, "C:/Users/Пользователь/Downloads/five_resized.png", 73, 133);
+    Object prep = new Object(300, 800, "one_resized.png", 73, 133);
+    Object bonus = new Object(pl1.x - 100, pl1.y - 100, "five_resized.png", 73, 133);
+
+    Object akr =new Object(2000, 500, "C:/Users/Пользователь/Pictures/A.png", 150,113);
 
     private int kolichestvoSerdechek = 3;
     private boolean[] serdechkoVidno = {true, true, true};
 
-    int x_new = 1840;
-    private final int PAUSE_X = 20, PAUSE_Y = 30, PAUSE_W = 50, PAUSE_H = 50;
+    int x_new = 1920;
+    private final int PAUSE_X = 50, PAUSE_Y = 30, PAUSE_W = 100, PAUSE_H = 100;
 
     BufferedImage fon;
     BufferedImage buffer;
     Timer timer;
     int speed = 4;
+
 
     private boolean gameOverTriggered = false;
 
@@ -46,21 +47,40 @@ public class testGame extends JFrame implements ActionListener {
     private long startTime;
     private long currentTime;
     private static long bestTime = 0;
-    private static final String RECORD_FILE = "record.txt";
+    private static final String RECORD_FILE = "recordik.txt";
+    private static final String pers = "my.player.txt";
+
+
+
 
     public testGame(MouseAdapter start) {
-        setSize(1840, 1080);
+        try {
+            // Проверяем, существует ли файл
+            java.nio.file.Path path = java.nio.file.Paths.get("my.player.txt");
+            if (java.nio.file.Files.exists(path)) {
+                String content = new String(java.nio.file.Files.readAllBytes(path)).trim();
+                Player.pers = content.equals("1"); // "1" = девочка, "0" = мальчик
+                System.out.println("Загружен персонаж из файла: " + (Player.pers ? "девочка (1)" : "мальчик (0)"));
+            } /*else {
+                Player.pers = false; // по умолчанию — мальчик
+                System.out.println("Файл my.player.txt не найден. Используется персонаж по умолчанию: мальчик (0)");
+            }*/
+        } catch (Exception e) {
+            Player.pers = false; // ошибка → мальчик
+            System.err.println("Ошибка чтения файла персонажа: " + e.getMessage());
+        }        setSize(1920, 1200);
         setLayout(null);
+
 
         // Загрузка рекорда
         loadBestTime();
 
         try {
-            fon = ImageIO.read(new File("C:/Users/Пользователь/Pictures/game.png"));
+            fon = ImageIO.read(new File("game.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        buffer = new BufferedImage(1840, 1080, BufferedImage.TYPE_INT_ARGB);
+        buffer = new BufferedImage(1920, 1200, BufferedImage.TYPE_INT_ARGB);
 
         timer = new Timer(20, this);
         timer.start();
@@ -109,6 +129,15 @@ public class testGame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         currentTime = System.currentTimeMillis() - startTime;
 
+        long elapsedSeconds = (System.currentTimeMillis() - startTime) / 1000;
+
+        // Каждые 20 секунд — +1 к скорости (максимум 8)
+        int newSpeed = 3 + (int)(elapsedSeconds / 20);
+        if (newSpeed > 8) {
+            newSpeed = 8;
+        }
+        speed = newSpeed;
+
         x_new -= speed;
         for (int i = 0; i < plmas.length; i++) {
             plmas[i].move(speed, x_new);
@@ -118,7 +147,10 @@ public class testGame extends JFrame implements ActionListener {
         }
         bonus.moveobj(speed, plmas);
         prep.moveobj(speed, plmas);
-        prep2.moveobj(speed, plmas);
+        akr.moveakr( plmas);
+
+        if (bonus.x + 100 >= prep.x && bonus.x - 100 <= prep.x ) //чтоб бонусы и препятсвия не вместе были
+            bonus.visible= false;
 
         // Физика игрока
         myplayer.vy += 1;
@@ -138,6 +170,7 @@ public class testGame extends JFrame implements ActionListener {
             myplayer.x -= speed;
         }
 
+
         // GameOver: падение
         if (myplayer.y > 1080 && !gameOverTriggered) {
             gameOverTriggered = true;
@@ -154,13 +187,14 @@ public class testGame extends JFrame implements ActionListener {
             ubratSerdechko();
             prep.visible = false;
         }
-        if (prep2.visible && myplayer.bord.intersects(new Rectangle(prep2.x, prep2.y, prep2.width, prep2.height))) {
-            ubratSerdechko();
-            prep2.visible = false;
-        }
+
         if (bonus.visible && myplayer.bord.intersects(new Rectangle(bonus.x, bonus.y, bonus.width, bonus.height))) {
             verniSerdechko();
             bonus.visible = false;
+        }
+        if (akr.visible && myplayer.bord.intersects(new Rectangle(akr.x, akr.y, akr.width, akr.height))) {
+            ubratSerdechko();
+            akr.visible = false;
         }
 
         // GameOver: 0 сердечек
@@ -173,7 +207,7 @@ public class testGame extends JFrame implements ActionListener {
 
         repaint();
     }
-
+//На платформе ли стоит персонаж
     private void checkCollision(platforma plat) {
         int playerBottom = myplayer.y + myplayer.height;
         int platformTop = plat.y;
@@ -245,17 +279,16 @@ public class testGame extends JFrame implements ActionListener {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = buffer.createGraphics();
-        g2d.fillRect(0, 0, 1840, 1080);
+        g2d.fillRect(0, 0, 1920, 1200);
 
         if (fon != null) g2d.drawImage(fon, 0, 0, null);
-        g2d.drawImage(exit, 1100, 30, null);
         g2d.drawImage(pauza, PAUSE_X, PAUSE_Y, null);
 
         // Отображение времени и рекорда
-        g2d.setColor(Color.BLACK);
-        g2d.setFont(new Font("", Font.BOLD, 36));
-        g2d.drawString(String.format("Время: %.2f", currentTime / 1000.0), 1200, 100);
-        g2d.drawString(String.format("Рекорд: %.2f", bestTime / 1000.0), 1200, 150);
+        g2d.setColor(Color.WHITE);
+       g2d.setFont(new Font("Comic Sans MS", Font.BOLD, 36));
+        g2d.drawString(String.format("Время: %.2f", currentTime / 1000.0), 1100, 350); //   Форматирует строку: %.2f = число с 2 знаками после запятой и Преобразует миллисекунды в секунды (например, 12345 → 12.345)
+        g2d.drawString(String.format("Рекорд: %.2f", bestTime / 1000.0), 1100, 400);
 
         if (serdechkoVidno[0]) g2d.drawImage(helth1.img, helth1.x, helth1.y, null);
         if (serdechkoVidno[1]) g2d.drawImage(helth2.img, helth2.x, helth2.y, null);
@@ -263,8 +296,9 @@ public class testGame extends JFrame implements ActionListener {
 
         g2d.drawImage(myplayer.getCurrentImage(), myplayer.x, myplayer.y, null);
         if (prep.visible) g2d.drawImage(prep.img, prep.x, prep.y, null);
-        if (prep2.visible) g2d.drawImage(prep2.img, prep2.x, prep2.y, null);
         if (bonus.visible) g2d.drawImage(bonus.img, bonus.x, bonus.y, null);
+        if (akr.visible) g2d.drawImage(akr.img, akr.x, akr.y, null);
+
 
         for (platforma plat : plmas) {
             g2d.drawImage(plat.img, plat.x, plat.y, null);

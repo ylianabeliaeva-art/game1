@@ -2,14 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class Start extends JFrame {
-    public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zakryt.png");
-    public Image vyborpers = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Pictures/f.png");
-    public ImageIcon pers1 = loadTransparentIcon("C:/Users/Пользователь/Downloads/игра/pers1.png");
-    public ImageIcon pers2 = loadTransparentIcon("C:/Users/Пользователь/Downloads/игра/pers2.png");
-  // кнопки из изображений
-    private final int clickAreaX = 1100; // неизменные параметры
+    public Image exit = Toolkit.getDefaultToolkit().createImage("zakryt.png");
+    public Image vyborpers = Toolkit.getDefaultToolkit().createImage("f.vybor.png");
+    public ImageIcon pers1 = loadTransparentIcon("pers1.png");
+    public ImageIcon pers2 = loadTransparentIcon("pers2.png");
+    // кнопки из изображений
+    private final int clickAreaX = 1700; // неизменные параметры
     private final int clickAreaY = 50;
     private int shirinaexitX = 100;
     private int vysotanaexitY = 100;
@@ -92,7 +94,7 @@ public class Start extends JFrame {
 
     public Start(MouseListener mouseListener) {
 
-        setSize(1840, 1080);
+        setSize(1920, 1200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
 
@@ -125,8 +127,8 @@ public class Start extends JFrame {
         imagepers1.setOpaque(false);
         imagepers2.setOpaque(false);
 
-        imagepers1.setBounds(450, 330, pers1.getIconWidth(), pers1.getIconHeight());
-        imagepers2.setBounds(800, 330, pers2.getIconWidth(), pers2.getIconHeight());
+        imagepers1.setBounds(570, 580, pers1.getIconWidth(), pers1.getIconHeight());
+        imagepers2.setBounds(1100, 580, pers2.getIconWidth(), pers2.getIconHeight());
 
         panel.add(imagepers1);
         panel.add(imagepers2);
@@ -151,9 +153,23 @@ public class Start extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                Player.pers = true;
+                Player.pers = true; // девочка
                 System.out.println("woman");
-                new testGame (this);
+
+                // Записываем "1" в файл
+                {
+                    PrintWriter out = null;
+                    try {
+                        out = new PrintWriter("my.player.txt");
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    out.println(1);
+                    out.close();
+                }
+
+
+                new testGame(this);
             }
 
         });
@@ -174,9 +190,23 @@ public class Start extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Player.pers = false;
-                System.out.println("men");
-                new testGame (this);
+
+                // Путь на Рабочий стол — файл точно найдёте!
+                {
+                    PrintWriter out = null;
+                    try {
+                        out = new PrintWriter("my.player.txt");
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    out.println(0);
+                    out.close();
+                }
+
+
+                new testGame(this);
             }
+
         });
 
         addWindowListener(new WindowAdapter() {
@@ -194,7 +224,7 @@ public class Start extends JFrame {
     public Start(My_window my_window) {
         this.my_window1 = my_window;
         my_window.setVisible(false);
-        setSize(1840, 1080);
+        setSize(1920, 1200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
 
@@ -212,7 +242,7 @@ public class Start extends JFrame {
                 }
 
                 if (exit != null) {
-                    g.drawImage(exit, 1100, 50, this);
+                    g.drawImage(exit, 1700, 50, this);
                 }
             }
         };
@@ -228,8 +258,8 @@ public class Start extends JFrame {
         imagepers1.setOpaque(false);
         imagepers2.setOpaque(false);
 
-        imagepers1.setBounds(350, 330, pers1.getIconWidth(), pers1.getIconHeight());
-        imagepers2.setBounds(900, 330, pers2.getIconWidth(), pers2.getIconHeight());
+        imagepers1.setBounds(570, 580, pers1.getIconWidth(), pers1.getIconHeight());
+        imagepers2.setBounds(1100, 580, pers2.getIconWidth(), pers2.getIconHeight());
 
         panel.add(imagepers1);
         panel.add(imagepers2);
@@ -294,4 +324,3 @@ public class Start extends JFrame {
         setVisible(true);
     }
 }
-

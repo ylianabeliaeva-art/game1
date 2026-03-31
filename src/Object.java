@@ -9,14 +9,9 @@ public class Object {
     int width;
     int height;
     boolean move=true;
-    public boolean wer(Rectangle prep){
-        Rectangle bord = new Rectangle(x, y, width, height);
-        if(bord.intersects(prep)){
-            System.out.println("zzzzzzzzz");
-            return true;
-        }
-        return false;
-    }
+    boolean movea=true;
+
+
     Object(int xcoord, int ycoord, String way, int w, int h)
     {
         x = xcoord;
@@ -38,9 +33,9 @@ public class Object {
             move=false;
             x= 2000 + new Random().nextInt(500);
             if (new Random().nextInt(2)<2)
-                y = 505-height;
+                y = 605-height;
             else
-                y = 705-height;
+                y = 905-height;
         }
 
         if (x>=2000)
@@ -54,12 +49,12 @@ public class Object {
             for (int i=0; i< platformas.length; i++)
             {
                 Rectangle bord = new Rectangle(x, y, width, height);
-                if (y>600 && platformas[i].y ==700)
+                if (y>800 && platformas[i].y ==900)
                     if (bord.intersects(new Rectangle(platformas[i].x, platformas[i].y, platformas[i].width, platformas[i].height)))
                     {
                         move=true;
                     }
-                if (y<500 && platformas[i].y ==500)
+                if (y<600 && platformas[i].y ==600)
                     if (bord.intersects(new Rectangle(platformas[i].x, platformas[i].y, platformas[i].width, platformas[i].height)))
                     {
                         move=true;
@@ -67,6 +62,27 @@ public class Object {
             }
         }
     }
+    public void moveakr(platforma[] platformas) {
+        // Если объект ушёл за левый край — перезапускаем
+        if (x + width < 0) {
+            visible = true;
+            x = 2000 + new Random().nextInt(500); // появляется справа
+            // Выбираем высоту: либо над верхней, либо над нижней платформой
+            if (new Random().nextInt(2) == 0) {
+                y = 900 - height; // над платформой на 900
+            } else {
+                y = 600 - height; // над платформой на 600
+            }
+            movea = true; //  СРАЗУ ДЕЛАЕМ АКТИВНЫМ
+            return; // выходим, чтобы не обрабатывать движение дважды
+        }
+
+        // Движение
+        if (movea) {
+            x -= 10;
+        }
+    }
+
 
 }
 

@@ -23,16 +23,6 @@ public class Player {
     public double vx = 0; // горизонтальная скорость
     public boolean onGround = true;
 
-    public boolean wer(Rectangle prep) {
-        System.out.println("zov");
-        bord = new Rectangle(x, y, width, height);
-        if (bord.intersects(prep)) {
-            System.out.println("zzzzzzzzz");
-            return true;
-        }
-        return false;
-    }
-
     Player(int coordX, int coordY, int w, int h) {
         x = coordX;
         y = coordY;
@@ -41,9 +31,15 @@ public class Player {
         y_up = true;
         y_down = true;
 
-        String path = pers ?
-                "C:/Users/Пользователь/Downloads/игра/pers1_resized.png" :
-                "C:/Users/Пользователь/Downloads/игра/pers2_resized.png";
+        String path; // Объявляем переменную
+
+        if (pers == false) {
+            // Если pers = true
+            path = "C:/Users/Пользователь/IdeaProjects/game1/src/img/pers2_resized.png";
+        } else {
+            // Если pers = false
+            path = "C:/Users/Пользователь/IdeaProjects/game1/src/img/pers1_resized.png";
+        }
 
         try {
             imgRight = ImageIO.read(new File(path));
@@ -70,3 +66,4 @@ public class Player {
         return op.filter(image, null); // создай новое изображение автоматически (возвращает новое изображение без изменения оригинала)
     }
 }
+

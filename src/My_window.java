@@ -5,26 +5,26 @@ import java.awt.event.MouseListener;
 public class My_window extends JFrame
 {
 
-   public Image fon = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Pictures/mainMenu.png");
-   public Image nastr = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/nastr.png");
-    public Image zapusk = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zapusk.png");
-    public Image exit = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zakryt.png");
+   public Image fon = Toolkit.getDefaultToolkit().createImage("mainMenu.png");
+   public Image nastr = Toolkit.getDefaultToolkit().createImage("nastr.png");
+    public Image zapusk = Toolkit.getDefaultToolkit().createImage("zapusk.png");
+    public Image exit = Toolkit.getDefaultToolkit().createImage("zakryt.png");
     public boolean f = false;
     public boolean s = false;
     public boolean r = false;
 
 
-    private final int clickAreaX = 424; // превращает в  константу
-    private final int clickAreaY = 380;
+    private final int clickAreaX = 650; // превращает в константу
+    private final int clickAreaY = 580;
     private int shirinanastrX = 100;
     private int vysotanastrY = 50;
 
-    private final int clickAreaX1 = 680;
-    private final int clickAreaY1 = 380;
+    private final int clickAreaX1 = 1100;
+    private final int clickAreaY1 = 580;
     private int shirinazapuskX = 100;
     private int vysotazapuskY = 50;
 
-    private final int clickAreaX2 = 1100;
+    private final int clickAreaX2 = 1700;
     private final int clickAreaY2 = 50;
     private int shirinaexitX = 100;
     private int vysotanaexitY = 100;
@@ -73,9 +73,6 @@ public class My_window extends JFrame
 
     My_window ()
     {
-
-        System.out.print("start");
-
         MediaTracker tracker = new MediaTracker(this);
         tracker.addImage(nastr, 0);
         try {
@@ -106,7 +103,7 @@ public class My_window extends JFrame
         }
 
 
-        setSize(1840,1080);
+        setSize(1920,1200);
         setVisible(true);
         addMouseListener(ml);
 
@@ -118,9 +115,9 @@ public class My_window extends JFrame
     public void paint(Graphics g)
     {
         g.drawImage(fon,0,0, this);
-        g.drawImage(nastr,424,380, this);
-        g.drawImage(zapusk,680,380, this);
-        g.drawImage(exit,1100,50, this);
+        g.drawImage(nastr,650,580, this);
+        g.drawImage(zapusk,1100,580, this);
+        g.drawImage(exit,1700,50, this);
 
 
         if (f)

@@ -6,14 +6,14 @@ import java.awt.event.MouseEvent;
 public class Pauza extends JFrame {
     private testGame game; // ССЫЛКА НА ИГРУ
 
-    public Image window = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/1772483472be46.png");
-    public Image zanovo = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zanovo.png");
-    public Image home = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/home.png");
-    public Image play = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Downloads/игра/zapusk.png");
+    public Image window = Toolkit.getDefaultToolkit().createImage("pausa_Fon.png");
+    public Image zanovo = Toolkit.getDefaultToolkit().createImage("zanovo.png");
+    public Image home = Toolkit.getDefaultToolkit().createImage("home.png");
+    public Image play = Toolkit.getDefaultToolkit().createImage("zapusk.png");
 
-    private final int HOME_X = 224, HOME_Y = 380;
-    private final int ZANOVO_X = 580, ZANOVO_Y = 380;
-    private final int PLAY_X = 880, PLAY_Y = 380;
+    private final int HOME_X = 460, HOME_Y = 580;
+    private final int ZANOVO_X = 860, ZANOVO_Y = 580;
+    private final int PLAY_X = 1260, PLAY_Y = 580;
 
     // Размеры кнопок (загружаем один раз)
     private int homeWidth, homeHeight, zanovoWidth, zanovoHeight, playWidth, playHeight;
@@ -21,7 +21,7 @@ public class Pauza extends JFrame {
     public Pauza(testGame game) {
         this.game = game; // ← СОХРАНЯЕМ ССЫЛКУ
 
-        setSize(1840, 1080);
+        setSize(1920, 1200);
         setLayout(null);
         setVisible(true);
 
