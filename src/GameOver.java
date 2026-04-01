@@ -1,6 +1,6 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
+        import java.awt.*;
+        import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,35 +20,35 @@ public class GameOver extends JFrame {
     private final int clickAreaY1 = 600;
     private int shirinahomeX = 100;
     private int vysotahomeY = 50;
-   public  GameOver(testGame testgame) {
+    public  GameOver(testGame testgame) {
 
 
-       MediaTracker tracker = new MediaTracker(this);
-       tracker.addImage(home, 0);
-       try {
-           tracker.waitForID(0);
-           shirinahomeX = home.getWidth(this);
-           vysotahomeY = home.getHeight(this);
+        MediaTracker tracker = new MediaTracker(this);
+        tracker.addImage(home, 0);
+        try {
+            tracker.waitForID(0);
+            shirinahomeX = home.getWidth(this);
+            vysotahomeY = home.getHeight(this);
 
-       } catch (InterruptedException e) {
-           e.printStackTrace();
-       }
-       tracker.addImage(zanovo, 0);
-       try {
-           tracker.waitForID(0);
-           shirinazanovoX = zanovo.getWidth(this);
-           vysotazanovoY = zanovo.getHeight(this);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        tracker.addImage(zanovo, 0);
+        try {
+            tracker.waitForID(0);
+            shirinazanovoX = zanovo.getWidth(this);
+            vysotazanovoY = zanovo.getHeight(this);
 
-       } catch (InterruptedException e) {
-           e.printStackTrace();
-       }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         setSize(1920, 1200);
 
         setVisible(true);
-       addMouseListener(mouseListener);
+        addMouseListener(mouseListener);
 
 
-   }
+    }
     MouseListener mouseListener = new MouseListener() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -63,7 +63,6 @@ public class GameOver extends JFrame {
             if (mouseX >= clickAreaX1 && mouseX <= clickAreaX1 + shirinazanovoX &&
                     mouseY >= clickAreaY1 && mouseY <= clickAreaY1 + vysotazanovoY) {
                 s = true;
-                System.out.println("c");
             }
             repaint();
         }
@@ -96,21 +95,21 @@ public class GameOver extends JFrame {
     }
 
 
-                public void paint (Graphics g){
-                g.drawImage(window, 0, 0, this);
-                    g.drawImage(home, 700, 600, this);
-                    g.drawImage(zanovo, 1100, 600, this);
-                    if (f)
-                    {
-                       My_window my_window = new My_window();
-                       dispose();
-                    }
+    public void paint (Graphics g){
+        g.drawImage(window, 0, 0, this);
+        g.drawImage(home, 700, 600, this);
+        g.drawImage(zanovo, 1100, 600, this);
+        if (f)
+        {
+            My_window my_window = new My_window();
+            dispose();
+        }
 
-                    if (s)
-                    {
-                        dispose();
-                        new testGame(null);
-                    }
+        if (s)
+        {
+            dispose();
+            new testGame(null);
+        }
 
-                }
-            }
+    }
+}

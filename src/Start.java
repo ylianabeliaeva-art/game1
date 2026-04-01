@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class Start extends JFrame {
     public Image exit = Toolkit.getDefaultToolkit().createImage("zakryt.png");
@@ -92,135 +92,6 @@ public class Start extends JFrame {
         }
     }
 
-    public Start(MouseListener mouseListener) {
-
-        setSize(1920, 1200);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(null);
-
-        ((JComponent) getContentPane()).setOpaque(false);
-
-
-        JPanel panel = new JPanel() { // прямоугольная область для группировки и размещения кнопок и тд
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-
-                if (vyborpers != null) {
-                    g.drawImage(vyborpers, 0, 0, getWidth(), getHeight(), this);
-                }
-
-                if (exit != null) {
-                    g.drawImage(exit, 1500, 50, this);
-                }
-            }
-        };
-        panel.setLayout(null);
-        panel.setOpaque(false); // не рисует фон
-        panel.setBounds(0, 0, getWidth(), getHeight()); // ручное задание координат
-
-        panel.addMouseListener(ml);
-
-        imagepers1 = new JLabel(pers1);
-        imagepers2 = new JLabel(pers2);
-
-        imagepers1.setOpaque(false);
-        imagepers2.setOpaque(false);
-
-        imagepers1.setBounds(570, 580, pers1.getIconWidth(), pers1.getIconHeight());
-        imagepers2.setBounds(1100, 580, pers2.getIconWidth(), pers2.getIconHeight());
-
-        panel.add(imagepers1);
-        panel.add(imagepers2);
-
-        add(panel);
-
-        uvelich1();
-        uvelich2();
-
-        imagepers1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                imagepers1.setIcon(pers1Big);
-                imagepers1.repaint();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                imagepers1.setIcon(pers1);
-                imagepers1.repaint();
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Player.pers = true; // девочка
-                System.out.println("woman");
-
-                // Записываем "1" в файл
-                {
-                    PrintWriter out = null;
-                    try {
-                        out = new PrintWriter("my.player.txt");
-                    } catch (FileNotFoundException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    out.println(1);
-                    out.close();
-                }
-
-
-                new testGame(this);
-            }
-
-        });
-
-        imagepers2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                imagepers2.setIcon(pers2Big);
-                imagepers2.repaint();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                imagepers2.setIcon(pers2);
-                imagepers2.repaint();
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Player.pers = false;
-
-                // Путь на Рабочий стол — файл точно найдёте!
-                {
-                    PrintWriter out = null;
-                    try {
-                        out = new PrintWriter("my.player.txt");
-                    } catch (FileNotFoundException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    out.println(0);
-                    out.close();
-                }
-
-
-                new testGame(this);
-            }
-
-        });
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                my_window1.setVisible(true);
-                dispose();
-            }
-
-        });
-
-        setVisible(true);
-    }
-
     public Start(My_window my_window) {
         this.my_window1 = my_window;
         my_window.setVisible(false);
@@ -235,12 +106,9 @@ public class Start extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-
-
                 if (vyborpers != null) {
                     g.drawImage(vyborpers, 0, 0, getWidth(), getHeight(), this);
                 }
-
                 if (exit != null) {
                     g.drawImage(exit, 1700, 50, this);
                 }
@@ -284,9 +152,18 @@ public class Start extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                System.out.println("woman");
+                try(BufferedWriter bw = new BufferedWriter(new FileWriter("my_player.txt")))
+                {
+                    bw.write("1");
+                }
+                catch(IOException ex){
 
-                //Game game = new Game(this);
-                new testGame (this);
+                    System.out.println(ex.getMessage());
+                }
+                dispose();
+                new testGame(this);
+
             }
 
         });
@@ -306,9 +183,18 @@ public class Start extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                //Game game = new Game(this);
-                new testGame (this);
+                System.out.println("men");
+                try(BufferedWriter bw = new BufferedWriter(new FileWriter("my_player.txt")))
+                {
+                    bw.write("0");
+                }
+                catch(IOException ex){
+
+                    System.out.println(ex.getMessage());
+                }
+
                 dispose();
+                new testGame(this);
             }
         });
 

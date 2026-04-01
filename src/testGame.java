@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,7 +27,7 @@ public class testGame extends JFrame implements ActionListener {
     Object prep = new Object(300, 800, "one_resized.png", 73, 133);
     Object bonus = new Object(pl1.x - 100, pl1.y - 100, "five_resized.png", 73, 133);
 
-    Object akr =new Object(2000, 500, "C:/Users/Пользователь/Pictures/A.png", 150,113);
+    Object akr =new Object(2000, 500, "A.png", 150,113);
 
     private int kolichestvoSerdechek = 3;
     private boolean[] serdechkoVidno = {true, true, true};
@@ -48,27 +48,20 @@ public class testGame extends JFrame implements ActionListener {
     private long currentTime;
     private static long bestTime = 0;
     private static final String RECORD_FILE = "recordik.txt";
-    private static final String pers = "my.player.txt";
+
 
 
 
 
     public testGame(MouseAdapter start) {
-        try {
-            // Проверяем, существует ли файл
-            java.nio.file.Path path = java.nio.file.Paths.get("my.player.txt");
-            if (java.nio.file.Files.exists(path)) {
-                String content = new String(java.nio.file.Files.readAllBytes(path)).trim();
-                Player.pers = content.equals("1"); // "1" = девочка, "0" = мальчик
-                System.out.println("Загружен персонаж из файла: " + (Player.pers ? "девочка (1)" : "мальчик (0)"));
-            } /*else {
-                Player.pers = false; // по умолчанию — мальчик
-                System.out.println("Файл my.player.txt не найден. Используется персонаж по умолчанию: мальчик (0)");
-            }*/
-        } catch (Exception e) {
-            Player.pers = false; // ошибка → мальчик
-            System.err.println("Ошибка чтения файла персонажа: " + e.getMessage());
-        }        setSize(1920, 1200);
+        try (BufferedReader br = new BufferedReader(new FileReader("my_player.txt"))) {
+            myplayer.pers(br.read() );
+        } catch (FileNotFoundException exception) {
+            throw new RuntimeException(exception);
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+        setSize(1920, 1200);
         setLayout(null);
 
 
@@ -193,6 +186,7 @@ public class testGame extends JFrame implements ActionListener {
             bonus.visible = false;
         }
         if (akr.visible && myplayer.bord.intersects(new Rectangle(akr.x, akr.y, akr.width, akr.height))) {
+            ubratSerdechko();
             ubratSerdechko();
             akr.visible = false;
         }

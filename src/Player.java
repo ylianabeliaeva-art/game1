@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Player {
-    public static boolean pers;
+
 
     private BufferedImage imgRight;   // оригинал (смотрит влево)
     private BufferedImage imgLeft;    // зеркальное
@@ -31,9 +31,19 @@ public class Player {
         y_up = true;
         y_down = true;
 
-        String path; // Объявляем переменную
 
-        if (pers == false) {
+        try {
+        imgRight = ImageIO.read(new File("C:/Users/Пользователь/IdeaProjects/game1/src/img/pers2_resized.png"));
+        imgLeft = flip(imgRight);
+    } catch (IOException e) {
+    }
+
+    }
+    public void pers   (int number)
+    {
+        String path; // Объявляем переменную
+        number = number-48;
+        if (number == 0) {
             // Если pers = true
             path = "C:/Users/Пользователь/IdeaProjects/game1/src/img/pers2_resized.png";
         } else {
@@ -45,7 +55,7 @@ public class Player {
             imgRight = ImageIO.read(new File(path));
             imgLeft = flip(imgRight);
         } catch (IOException e) {
-          }
+        }
     }
 
     // Возвращает текущее изображение (с учётом направления)

@@ -131,8 +131,8 @@ public class My_window extends JFrame
         }
         if (r)
         {
-            dispose();
-        }
+            //dispose();
+            System.exit(0);        }
     }
 
     public static void main(String[] args) {

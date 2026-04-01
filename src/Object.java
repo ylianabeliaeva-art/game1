@@ -50,12 +50,12 @@ public class Object {
             {
                 Rectangle bord = new Rectangle(x, y, width, height);
                 if (y>800 && platformas[i].y ==900)
-                    if (bord.intersects(new Rectangle(platformas[i].x, platformas[i].y, platformas[i].width, platformas[i].height)))
+                    if (bord.intersects(new Rectangle(platformas[i].x+150, platformas[i].y, platformas[i].width-150, platformas[i].height)))
                     {
                         move=true;
                     }
                 if (y<600 && platformas[i].y ==600)
-                    if (bord.intersects(new Rectangle(platformas[i].x, platformas[i].y, platformas[i].width, platformas[i].height)))
+                    if (bord.intersects(new Rectangle(platformas[i].x+150, platformas[i].y, platformas[i].width-150, platformas[i].height)))
                     {
                         move=true;
                     }

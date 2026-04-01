@@ -25,7 +25,7 @@ public class Nastr extends JFrame {
     private final int shirinazapuskX = 200;
     private final int vysotazapuskY = 200;
 
-    // 🎵 Глобальные статические поля — живут пока работает программа
+    //  Глобальные статические поля — живут пока работает программа
     private static Clip backgroundMusic;
     private static boolean isMusicPlaying = false;
     private static final String musicPath = "music_school.wav";
@@ -55,7 +55,7 @@ public class Nastr extends JFrame {
                 repaint();
             }
 
-            // 🚪 Кнопка выхода
+            //  Кнопка выхода
             if (mouseX >= clickAreaX && mouseX <= clickAreaX + shirinaexitX &&
                     mouseY >= clickAreaY && mouseY <= clickAreaY + vysotanaexitY) {
                 f = true;
