@@ -33,12 +33,13 @@ public class Nastr extends JFrame {
     public My_window my_window;
 
     MouseListener ml = new MouseListener() {
+
         @Override
         public void mouseClicked(MouseEvent e) {
             int mouseX = e.getX();
             int mouseY = e.getY();
 
-            // 🔘 Кнопка вкл/выкл звука
+            //  Кнопка вкл/выкл звука
             if (mouseX >= clickAreaX1 && mouseX <= clickAreaX1 + shirinazapuskX &&
                     mouseY >= clickAreaY1 && mouseY <= clickAreaY1 + vysotazapuskY) {
 
@@ -69,6 +70,7 @@ public class Nastr extends JFrame {
     };
 
     public Nastr(My_window my_window) {
+        setTitle("Включи музыку");
         this.my_window = my_window;
         my_window.setVisible(false);
         setSize(1920, 1200);

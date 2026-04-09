@@ -79,6 +79,8 @@ public class Object {
 
         // Движение
         if (movea) {
+
+
             x -= 10;
         }
     }

@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
 import java.io.*;
 
 public class Start extends JFrame {
@@ -93,6 +92,7 @@ public class Start extends JFrame {
     }
 
     public Start(My_window my_window) {
+        setTitle("Выбери персонажа");
         this.my_window1 = my_window;
         my_window.setVisible(false);
         setSize(1920, 1200);

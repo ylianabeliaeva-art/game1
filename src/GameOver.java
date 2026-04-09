@@ -1,7 +1,6 @@
 import javax.swing.*;
-        import java.awt.*;
-        import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
+import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -22,6 +21,7 @@ public class GameOver extends JFrame {
     private int vysotahomeY = 50;
     public  GameOver(testGame testgame) {
 
+        setTitle("Попробуй еще раз");
 
         MediaTracker tracker = new MediaTracker(this);
         tracker.addImage(home, 0);

@@ -32,11 +32,7 @@ public class Player {
         y_down = true;
 
 
-        try {
-        imgRight = ImageIO.read(new File("C:/Users/Пользователь/IdeaProjects/game1/src/img/pers2_resized.png"));
-        imgLeft = flip(imgRight);
-    } catch (IOException e) {
-    }
+
 
     }
     public void pers   (int number)
@@ -45,10 +41,10 @@ public class Player {
         number = number-48;
         if (number == 0) {
             // Если pers = true
-            path = "C:/Users/Пользователь/IdeaProjects/game1/src/img/pers2_resized.png";
+            path = "pers2_resized.png";
         } else {
             // Если pers = false
-            path = "C:/Users/Пользователь/IdeaProjects/game1/src/img/pers1_resized.png";
+            path = "pers1_resized.png";
         }
 
         try {

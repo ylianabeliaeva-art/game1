@@ -19,6 +19,7 @@ public class Pauza extends JFrame {
     private int homeWidth, homeHeight, zanovoWidth, zanovoHeight, playWidth, playHeight;
 
     public Pauza(testGame game) {
+        setTitle("Переменка");
         this.game = game; // ← СОХРАНЯЕМ ССЫЛКУ
 
         setSize(1920, 1200);

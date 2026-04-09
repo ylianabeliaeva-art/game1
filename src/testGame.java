@@ -54,6 +54,7 @@ public class testGame extends JFrame implements ActionListener {
 
 
     public testGame(MouseAdapter start) {
+        setTitle("Учись хорошо");
         try (BufferedReader br = new BufferedReader(new FileReader("my_player.txt"))) {
             myplayer.pers(br.read() );
         } catch (FileNotFoundException exception) {

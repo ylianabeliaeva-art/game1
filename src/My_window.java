@@ -9,9 +9,13 @@ public class My_window extends JFrame
    public Image nastr = Toolkit.getDefaultToolkit().createImage("nastr.png");
     public Image zapusk = Toolkit.getDefaultToolkit().createImage("zapusk.png");
     public Image exit = Toolkit.getDefaultToolkit().createImage("zakryt.png");
+    public Image info = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Pictures/info.png");
+
     public boolean f = false;
     public boolean s = false;
     public boolean r = false;
+    public boolean i = false;
+
 
 
     private final int clickAreaX = 650; // превращает в константу
@@ -28,6 +32,13 @@ public class My_window extends JFrame
     private final int clickAreaY2 = 50;
     private int shirinaexitX = 100;
     private int vysotanaexitY = 100;
+
+    private final int clickAreaX3 = 100;
+    private final int clickAreaY3 = 100;
+    private int shirinainfX = 150;
+    private int vysotainfY = 100;
+
+
 
     MouseListener ml = new MouseListener()
     {
@@ -49,6 +60,11 @@ public class My_window extends JFrame
             if (mouseX >= clickAreaX2 && mouseX <= clickAreaX2 + shirinaexitX &&
                     mouseY >= clickAreaY2 && mouseY <= clickAreaY2 + vysotanaexitY) {
                 r = true;
+            }
+            repaint();
+            if (mouseX >= clickAreaX3 && mouseX <= clickAreaX3 + shirinainfX &&
+                    mouseY >= clickAreaY3 && mouseY <=clickAreaY3 + vysotainfY) {
+                i = true;
             }
             repaint();
         }
@@ -73,6 +89,8 @@ public class My_window extends JFrame
 
     My_window ()
     {
+        setTitle("Бег за оценками");
+
         MediaTracker tracker = new MediaTracker(this);
         tracker.addImage(nastr, 0);
         try {
@@ -101,6 +119,15 @@ public class My_window extends JFrame
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        tracker.addImage(info, 0);
+        try {
+            tracker.waitForID(0);
+            shirinainfX = info.getWidth(this);
+            vysotainfY =info.getHeight(this);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
         setSize(1920,1200);
@@ -118,6 +145,7 @@ public class My_window extends JFrame
         g.drawImage(nastr,650,580, this);
         g.drawImage(zapusk,1100,580, this);
         g.drawImage(exit,1700,50, this);
+        g.drawImage(info,100,100, this);
 
 
         if (f)
@@ -129,11 +157,16 @@ public class My_window extends JFrame
         {
             Start start = new Start(this);
         }
+        if (i)
+        {
+            Info info = new Info(this);
+        }
         if (r)
         {
             //dispose();
             System.exit(0);        }
     }
+
 
     public static void main(String[] args) {
         My_window w =  new My_window();
