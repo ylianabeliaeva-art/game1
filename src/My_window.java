@@ -9,7 +9,7 @@ public class My_window extends JFrame
    public Image nastr = Toolkit.getDefaultToolkit().createImage("nastr.png");
     public Image zapusk = Toolkit.getDefaultToolkit().createImage("zapusk.png");
     public Image exit = Toolkit.getDefaultToolkit().createImage("zakryt.png");
-    public Image info = Toolkit.getDefaultToolkit().createImage("C:/Users/Пользователь/Pictures/info.png");
+    public Image info = Toolkit.getDefaultToolkit().createImage("info.png");
 
     public boolean f = false;
     public boolean s = false;
