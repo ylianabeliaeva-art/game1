@@ -9,25 +9,25 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class testGame extends JFrame implements ActionListener {
-    public Image pauza = Toolkit.getDefaultToolkit().createImage("pauza.png");
+    public Image pauza = Toolkit.getDefaultToolkit().createImage("images/pauza.png");
 
     Player myplayer = new Player(450, 450, 60, 250);
 
-    Object helth1 = new Object(700, 30, "helth.png", 100, 100);
-    Object helth2 = new Object(900, 30, "helth.png", 100, 100);
-    Object helth3 = new Object(1100, 30, "helth.png", 100, 100);
+    Object helth1 = new Object(700, 30, "images/helth.png", 100, 100);
+    Object helth2 = new Object(900, 30, "images/helth.png", 100, 100);
+    Object helth3 = new Object(1100, 30, "images/helth.png", 100, 100);
 
-    platforma pl1 = new platforma(900, 600, "platf600.geom.png", 600, 70);
-    platforma pl2 = new platforma(130, 900, "platf600.alg.png", 600, 70);
-    platforma plm1 = new platforma(1875, 600, "platf350.russ.png", 350, 70);
-    platforma plm2 = new platforma(2310, 600, "platf400.fiz.png", 400, 70);
-    platforma plm3 = new platforma(2675, 900, "platf350.lit.png", 350, 70);
+    platforma pl1 = new platforma(900, 600, "images/platf600.geom.png", 600, 70);
+    platforma pl2 = new platforma(130, 900, "images/platf600.alg.png", 600, 70);
+    platforma plm1 = new platforma(1875, 600, "images/platf350.russ.png", 350, 70);
+    platforma plm2 = new platforma(2310, 600, "images/platf400.fiz.png", 400, 70);
+    platforma plm3 = new platforma(2675, 900, "images/platf350.lit.png", 350, 70);
     platforma[] plmas = {pl1, pl2, plm1, plm2, plm3};
 
-    Object prep = new Object(300, 800, "one_resized.png", 73, 133);
-    Object bonus = new Object(pl1.x - 100, pl1.y - 100, "five_resized.png", 73, 133);
+    Object prep = new Object(300, 800, "images/one_resized.png", 73, 133);
+    Object bonus = new Object(pl1.x - 100, pl1.y - 100, "images/five_resized.png", 73, 133);
 
-    Object akr =new Object(2000, 500, "A.png", 150,113);
+    Object akr =new Object(2000, 500, "images/A.png", 150,113);
 
     private int kolichestvoSerdechek = 3;
     private boolean[] serdechkoVidno = {true, true, true};
@@ -47,7 +47,7 @@ public class testGame extends JFrame implements ActionListener {
     private long startTime;
     private long currentTime;
     private static long bestTime = 0;
-    private static final String RECORD_FILE = "recordik.txt";
+    private static final String RECORD_FILE = "images/recordik.txt";
 
 
 
@@ -55,7 +55,7 @@ public class testGame extends JFrame implements ActionListener {
 
     public testGame(MouseAdapter start) {
         setTitle("Учись хорошо");
-        try (BufferedReader br = new BufferedReader(new FileReader("my_player.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("images/my_player.txt"))) {
             myplayer.pers(br.read() );
         } catch (FileNotFoundException exception) {
             throw new RuntimeException(exception);
@@ -70,7 +70,7 @@ public class testGame extends JFrame implements ActionListener {
         loadBestTime();
 
         try {
-            fon = ImageIO.read(new File("game.png"));
+            fon = ImageIO.read(new File("images/game.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

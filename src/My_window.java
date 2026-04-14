@@ -5,11 +5,11 @@ import java.awt.event.MouseListener;
 public class My_window extends JFrame
 {
 
-   public Image fon = Toolkit.getDefaultToolkit().createImage("mainMenu.png");
-   public Image nastr = Toolkit.getDefaultToolkit().createImage("nastr.png");
-    public Image zapusk = Toolkit.getDefaultToolkit().createImage("zapusk.png");
-    public Image exit = Toolkit.getDefaultToolkit().createImage("zakryt.png");
-    public Image info = Toolkit.getDefaultToolkit().createImage("info.png");
+   public Image fon = Toolkit.getDefaultToolkit().createImage("images/mainMenu.png");
+   public Image nastr = Toolkit.getDefaultToolkit().createImage("images/nastr.png");
+    public Image zapusk = Toolkit.getDefaultToolkit().createImage("images/zapusk.png");
+    public Image exit = Toolkit.getDefaultToolkit().createImage("images/zakryt.png");
+    public Image info = Toolkit.getDefaultToolkit().createImage("images/info.png");
 
     public boolean f = false;
     public boolean s = false;

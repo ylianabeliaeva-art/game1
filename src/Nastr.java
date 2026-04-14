@@ -8,10 +8,10 @@ import java.awt.event.WindowListener;
 import java.io.File;
 
 public class Nastr extends JFrame {
-    public Image exit = Toolkit.getDefaultToolkit().createImage("zakryt.png");
-    public Image nastrimage = Toolkit.getDefaultToolkit().createImage("fonnastr.png");
-    public Image on = Toolkit.getDefaultToolkit().createImage("on.png");
-    public Image nezapusk = Toolkit.getDefaultToolkit().createImage("off.png");
+    public Image exit = Toolkit.getDefaultToolkit().createImage("images/zakryt.png");
+    public Image nastrimage = Toolkit.getDefaultToolkit().createImage("images/fonnastr.png");
+    public Image on = Toolkit.getDefaultToolkit().createImage("images/on.png");
+    public Image nezapusk = Toolkit.getDefaultToolkit().createImage("images/off.png");
 
     private final int clickAreaX = 1700;
     private final int clickAreaY = 50;
@@ -28,7 +28,7 @@ public class Nastr extends JFrame {
     //  Глобальные статические поля — живут пока работает программа
     private static Clip backgroundMusic;
     private static boolean isMusicPlaying = false;
-    private static final String musicPath = "music_school.wav";
+    private static final String musicPath = "images/music_school.wav";
 
     public My_window my_window;
 

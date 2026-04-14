@@ -41,10 +41,10 @@ public class Player {
         number = number-48;
         if (number == 0) {
             // Если pers = true
-            path = "pers2_resized.png";
+            path = "images/pers2_resized.png";
         } else {
             // Если pers = false
-            path = "pers1_resized.png";
+            path = "images/pers1_resized.png";
         }
 
         try {

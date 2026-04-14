@@ -6,10 +6,10 @@ import java.awt.event.MouseEvent;
 public class Pauza extends JFrame {
     private testGame game; // ССЫЛКА НА ИГРУ
 
-    public Image window = Toolkit.getDefaultToolkit().createImage("pausa_Fon.png");
-    public Image zanovo = Toolkit.getDefaultToolkit().createImage("zanovo.png");
-    public Image home = Toolkit.getDefaultToolkit().createImage("home.png");
-    public Image play = Toolkit.getDefaultToolkit().createImage("zapusk.png");
+    public Image window = Toolkit.getDefaultToolkit().createImage("images/pausa_Fon.png");
+    public Image zanovo = Toolkit.getDefaultToolkit().createImage("images/zanovo.png");
+    public Image home = Toolkit.getDefaultToolkit().createImage("images/home.png");
+    public Image play = Toolkit.getDefaultToolkit().createImage("images/zapusk.png");
 
     private final int HOME_X = 460, HOME_Y = 580;
     private final int ZANOVO_X = 860, ZANOVO_Y = 580;
